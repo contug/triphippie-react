@@ -12,15 +12,15 @@ export function Login() {
                             <span className={styles.fontThemeColor}>hippie</span>
                         </h1>
                     </header>
-                    <h3>Benvenuto</h3>
+                    <h4>Benvenuto</h4>
                     <form className={styles.loginForm}>
                         <input className={styles.loginFormInput} type="text" placeholder="Email"/>
                         <input className={styles.loginFormInput} type="password" placeholder="Password"/>
-                        <span>Hai dimenticato la password?</span>
+                        <a className={styles.loginLink}>Hai dimenticato la password?</a>
 
                         <button className={styles.loginFormButton} type="submit">Login</button>
                     </form>
-                    <h4>Registrati</h4>
+                    <a className={styles.loginLink}>Registrati</a>
                 </div>
             </div>
 
