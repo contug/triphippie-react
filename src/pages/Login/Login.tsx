@@ -9,7 +9,7 @@ export function Login() {
                         <img className={styles.loginAppLogoImage} src="/public/triphippie.png" alt="logo"/>
                         <h1>
                             <span>trip</span>
-                            <span className={styles.fontThemeColor}>hippie</span>
+                            <span className={styles.loginAppLogoText}>hippie</span>
                         </h1>
                     </header>
                     <h4>Benvenuto</h4>

@@ -34,11 +34,11 @@ body, html, #root{
 
 a {
   font-weight: 500;
-  color: $theme-color;
+  color: black;
   text-decoration: inherit;
-}
-a:hover {
-  color: $theme-color-hover;
+  &:hover {
+    color: $theme-color-bright;
+  }
 }
 
 

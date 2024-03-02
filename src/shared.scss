@@ -1,16 +1,17 @@
+$background-color: #cbcbcb;
 $theme-color: #1AB78D;
-$theme-color-hover: #1ADAAF;
+$theme-color-bright: #1ADAAF;
+$theme-color-dark: #0F7A5F;
 
 $input-text-dark: #d9d9d9;
 $input-text-dark-focus: #f2f2f2;
 
-.fontThemeColor {
+@mixin fontThemeColor {
   color: $theme-color;
 }
 
-
 @mixin boxShadowBlack {
-  box-shadow: 0 0 0.5rem 0.5rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 1rem 0.3rem rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.5s;
 }
 
@@ -30,6 +31,11 @@ $input-text-dark-focus: #f2f2f2;
   transition: background-color 0.5s;
 
   &:hover {
-    background-color: $theme-color-hover;
+    background-color: $theme-color-bright;
   }
+
+    &:active {
+        background-color: $theme-color-bright;
+      transform: scale(0.98);
+    }
 }
