@@ -1,14 +1,7 @@
 import './App.css'
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import {Home} from "./pages/Home/Home.tsx";
-import {Login} from "./pages/Login/Login.tsx";
+import {RouterProvider} from "react-router-dom";
 import {Loader} from "./components/Loader/Loader.tsx";
-
-
-const router = createBrowserRouter([
-    {path: '/', element: <Home/>},
-    {path: '/login', element: <Login/>},
-])
+import router from "./App.routing.tsx";
 
 function App() {
 
