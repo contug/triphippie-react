@@ -1,25 +1,29 @@
 import styles from './Login.module.scss';
 import {useNavigate} from "react-router-dom";
 import React from "react";
-import baseUrl from "../../env.params.ts";
-import axios from "axios";
+import {setLoadingStatus} from "../../store/loadingSlice.ts";
+import {useAppDispatch} from "../../hooks/redux-hooks.ts";
 
 
 export function Login() {
 
     const navigate = useNavigate();
 
+    const [email, setEmail] = React.useState('');
+    const [password, setPassword] = React.useState('');
+
+    const dispatch = useAppDispatch();
+
     const handleLogin = async (event: React.MouseEvent) => {
         event.preventDefault();
 
-        axios.post(`${baseUrl}/login`, JSON.stringify({
-            email: "test",
-            password: "test"
-
-        })).then(response => {
-            console.log(response);
-            navigate('/dashboard');
-        }).catch(e => console.log(e))
+        //TODO: axios.post -> login token
+        //mocked login call
+        dispatch(setLoadingStatus({callerId: "Login", status: true}))
+        setTimeout(() => {
+            dispatch(setLoadingStatus({callerId: "Login", status: false}))
+            navigate("/home")
+        }, 1000);
 
     }
 
@@ -36,13 +40,31 @@ export function Login() {
                     </header>
                     <h4>Benvenuto</h4>
                     <form className={styles.loginForm}>
-                        <input className={styles.loginFormInput} type="text" placeholder="Email"/>
-                        <input className={styles.loginFormInput} type="password" placeholder="Password"/>
+                        <input
+                            className={styles.loginFormInput}
+                            type="text"
+                            placeholder="Email"
+                            value={email}
+                            onChange={(event) => setEmail(event.target.value)}
+                        />
+                        <input
+                            className={styles.loginFormInput}
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(event) => setPassword(event.target.value)}
+                        />
                         <a className={styles.loginLink}>Hai dimenticato la password?</a>
 
-                        <button className={styles.loginFormButton} type="submit" onClick={(event) => {
-                            handleLogin(event)
-                        }}>Login
+                        <button
+                            className={styles.loginFormButton}
+                            type="submit"
+                            onClick={(event) => {
+                                handleLogin(event)
+                            }}
+                            disabled={!email || !password}
+                        >
+                            Login
                         </button>
                     </form>
                     <a className={styles.loginLink}>Registrati</a>

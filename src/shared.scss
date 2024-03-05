@@ -1,3 +1,8 @@
+$breakpoint-sm: 320px;
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+
 $background-color: #cbcbcb;
 $theme-color: #1AB78D;
 $theme-color-bright: #1ADAAF;
@@ -34,8 +39,13 @@ $input-text-dark-focus: #f2f2f2;
     background-color: $theme-color-bright;
   }
 
-    &:active {
-        background-color: $theme-color-bright;
-      transform: scale(0.98);
-    }
+  &:active {
+    background-color: $theme-color-bright;
+    transform: scale(0.98);
+  }
+
+  &:disabled {
+    background-color: $theme-color-dark;
+    cursor: not-allowed;
+  }
 }
