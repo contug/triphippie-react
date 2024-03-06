@@ -1,6 +1,6 @@
 import './App.css'
 import {RouterProvider} from "react-router-dom";
-import {Loader} from "./components/Loader/Loader.tsx";
+import Loader from "./components/Loader/Loader.tsx";
 import router from "./App.routing.tsx";
 
 function App() {
