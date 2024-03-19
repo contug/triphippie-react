@@ -25,6 +25,10 @@ $input-text-dark-focus: #f2f2f2;
   transition: box-shadow 0.5s;
 }
 
+@mixin svgThemeColor {
+  filter: invert(51%) sepia(94%) saturate(347%) hue-rotate(113deg) brightness(93%) contrast(98%);
+}
+
 @mixin tripHippieButton {
   @include boxShadowBlack;
   border: none;

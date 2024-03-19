@@ -1,7 +1,9 @@
 import {configureStore} from "@reduxjs/toolkit";
 import {authSlice} from "./authSlice.ts";
 import {loadingSlice} from "./loadingSlice.ts";
+import {enableMapSet} from 'immer'
 
+enableMapSet();
 
 export const store = configureStore({
     reducer: {
@@ -9,7 +11,6 @@ export const store = configureStore({
         loading: loadingSlice.reducer,
     }
 })
-
 
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

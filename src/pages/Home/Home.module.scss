@@ -1,1 +1,9 @@
 @import "../../index.scss";
+@import "../../shared.scss";
+
+.home {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+}

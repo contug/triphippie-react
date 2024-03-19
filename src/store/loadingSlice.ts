@@ -2,7 +2,15 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 
 export interface LoadingState {
-    loadingStatusMap: Map<string, boolean>;
+    /**
+     *   Object lookup as a Map serialization alternative
+     */
+    loadingStatusMap: { [key: string]: boolean };
+
+    /**
+     * Global loading status based on the loading status of all callers.
+     * If true, the loader will be displayed with an overlay to prevent user interaction.
+     */
     globalLoadingStatus: boolean;
 }
 
@@ -12,7 +20,7 @@ export interface SetLoadingStatusPayload {
 }
 
 const initialState: LoadingState = {
-    loadingStatusMap: new Map<string, boolean>(),
+    loadingStatusMap: {},
     globalLoadingStatus: false
 }
 
@@ -29,9 +37,9 @@ export const loadingSlice = createSlice({
          * @param action PayloadAction<SetLoadingStatusPayload> - the callerId and the loading status to set for the caller
          */
         setLoadingStatus: (state, action: PayloadAction<SetLoadingStatusPayload>) => {
-            action.payload.status ?
-                state.loadingStatusMap.set(action.payload.callerId, action.payload.status) : state.loadingStatusMap.delete(action.payload.callerId);
-            state.globalLoadingStatus = state.loadingStatusMap.size > 0;
+            //reproduce a Map but as object lookup
+            action.payload.status ? state.loadingStatusMap[action.payload.callerId] = true : delete state.loadingStatusMap[action.payload.callerId];
+            state.globalLoadingStatus = Object.keys(state.loadingStatusMap).length > 0;
         }
     }
 });

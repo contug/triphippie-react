@@ -5,7 +5,7 @@ import {setLoadingStatus} from "../../store/loadingSlice.ts";
 import {useAppDispatch} from "../../hooks/redux-hooks.ts";
 
 
-export function Login() {
+export default function Login() {
 
     const navigate = useNavigate();
 
