@@ -4,7 +4,7 @@ import messageIcon from '../../assets/message-text.svg';
 import settingsIcon from '../../assets/settings.svg';
 import logoutIcon from '../../assets/log-out.svg';
 import {useState} from "react";
-import {TripList} from "../TripList/TripList.tsx";
+import {TripsMenu} from "../TripsMenu/TripsMenu.tsx";
 
 enum ActiveDashboardChild {
     tripList,
@@ -16,7 +16,7 @@ enum ActiveDashboardChild {
 function selectDashboardChild(activeChild: ActiveDashboardChild) {
     switch (activeChild) {
         case ActiveDashboardChild.tripList:
-            return <TripList/>
+            return <TripsMenu/>
         case ActiveDashboardChild.messages:
             return <div>Messages</div>
         case ActiveDashboardChild.settings:
