@@ -1,0 +1,16 @@
+@import "../../index.scss";
+@import "../../shared.scss";
+
+.tag {
+  display: inline-block;
+  font-size: 1.2rem;
+  text-align: center;
+  padding:0 1rem;
+  border: 0;
+  border-radius: 0.5rem;
+  min-width: 2rem;
+  width: max-content;
+  overflow: hidden;
+  background-color: $theme-color;
+  color: white;
+}

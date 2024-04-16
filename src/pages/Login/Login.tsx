@@ -22,7 +22,7 @@ export default function Login() {
         dispatch(setLoadingStatus({callerId: "Login", status: true}))
         setTimeout(() => {
             dispatch(setLoadingStatus({callerId: "Login", status: false}))
-            navigate("/home")
+            navigate("/dashboard/trips")
         }, 1000);
 
     }

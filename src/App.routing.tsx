@@ -1,10 +1,18 @@
-import {createBrowserRouter} from "react-router-dom";
-import Home from "./pages/Home/Home.tsx";
+import {createBrowserRouter, createRoutesFromElements, Route} from "react-router-dom";
 import Login from "./pages/Login/Login.tsx";
+import {TripsPage} from "./pages/TripsPage/TripsPage.tsx";
 
-const router = createBrowserRouter([
-    {path: '/home', element: <Home/>},
-    {path: '/login', element: <Login/>},
-]);
+
+const router = createBrowserRouter(
+    createRoutesFromElements(
+        <>
+            <Route path="/dashboard/trips" element={<TripsPage/>}>
+            </Route>
+            <Route path="/dashboard/messages"></Route>
+            <Route path="/dashboard/settings"></Route>
+            <Route path="/dashboard/logout"></Route>
+            <Route path="/login" element={<Login/>}/>
+        </>
+    ));
 
 export default router;

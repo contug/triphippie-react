@@ -2,6 +2,7 @@ import {configureStore} from "@reduxjs/toolkit";
 import {authSlice} from "./authSlice.ts";
 import {loadingSlice} from "./loadingSlice.ts";
 import {enableMapSet} from 'immer'
+import {apiSlice} from "../services/apiSlice.ts";
 
 enableMapSet();
 
@@ -9,7 +10,9 @@ export const store = configureStore({
     reducer: {
         auth: authSlice.reducer,
         loading: loadingSlice.reducer,
-    }
+        api: apiSlice.reducer
+    },
+    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(apiSlice.middleware)
 })
 
 

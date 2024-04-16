@@ -3,8 +3,8 @@ import menuIcon from '../../assets/menu.svg';
 import messageIcon from '../../assets/message-text.svg';
 import settingsIcon from '../../assets/settings.svg';
 import logoutIcon from '../../assets/log-out.svg';
-import {useState} from "react";
-import {TripsMenu} from "../TripsMenu/TripsMenu.tsx";
+import {ReactNode, useCallback, useEffect, useState} from "react";
+import {useLocation, useNavigate} from "react-router-dom";
 
 enum ActiveDashboardChild {
     tripList,
@@ -13,7 +13,7 @@ enum ActiveDashboardChild {
     logout
 }
 
-function selectDashboardChild(activeChild: ActiveDashboardChild) {
+/*function selectDashboardChild(activeChild: ActiveDashboardChild) {
     switch (activeChild) {
         case ActiveDashboardChild.tripList:
             return <TripsMenu/>
@@ -24,11 +24,52 @@ function selectDashboardChild(activeChild: ActiveDashboardChild) {
         case ActiveDashboardChild.logout:
             return <div>Logout</div>
     }
+}*/
+
+interface DashboardProps {
+    children: ReactNode
 }
 
-export default function Dashboard() {
+export default function Dashboard({children}: DashboardProps) {
+
+    const navigate = useNavigate();
+
+    const location = useLocation();
+
+    /**
+     * Navigates to the given path
+     * @param path route to navigate to
+     */
+    const onIconSelected = (path: string) => {
+        navigate(path);
+    }
+
+    /**
+     * Gets the active dashboard icon based on location
+     */
+    const getActiveChild = useCallback(() => {
+        switch (location.pathname) {
+            case '/dashboard/trips':
+                return ActiveDashboardChild.tripList;
+            case '/dashboard/messages':
+                return ActiveDashboardChild.messages;
+            case '/dashboard/settings':
+                return ActiveDashboardChild.settings;
+            case '/dashboard/logout':
+                return ActiveDashboardChild.logout;
+            default:
+                return ActiveDashboardChild.tripList;
+        }
+    }, [location])
 
     const [activeChild, setActiveChild] = useState<ActiveDashboardChild>(0)
+
+    /**
+     * Checks the current route and sets the correct icon as active
+     */
+    useEffect(() => {
+        setActiveChild(getActiveChild());
+    }, [activeChild, getActiveChild])
 
     return (
         <div className={styles.dashboard}>
@@ -36,26 +77,26 @@ export default function Dashboard() {
                 <img
                     className={`${activeChild === 0 ? styles.dashboardHeaderIconActive : ''} ` + styles.dashboardHeaderIcon}
                     src={menuIcon} alt="menu"
-                    onClick={() => setActiveChild(0)}
+                    onClick={() => onIconSelected('/dashboard/trips')}
                 />
                 <img
                     className={`${activeChild === 1 ? styles.dashboardHeaderIconActive : ''} ` + styles.dashboardHeaderIcon}
                     src={messageIcon} alt="messages"
-                    onClick={() => setActiveChild(1)}
+                    onClick={() => onIconSelected('/dashboard/trips')}
                 />
                 <img
                     className={`${activeChild === 2 ? styles.dashboardHeaderIconActive : ''} ` + styles.dashboardHeaderIcon}
                     src={settingsIcon} alt="settings"
-                    onClick={() => setActiveChild(2)}
+                    onClick={() => onIconSelected('/dashboard/trips')}
                 />
                 <img
                     className={`${activeChild === 3 ? styles.dashboardHeaderIconActive : ''} ` + styles.dashboardHeaderIcon}
                     src={logoutIcon} alt="logout"
-                    onClick={() => setActiveChild(3)}
+                    onClick={() => onIconSelected('/dashboard/trips')}
                 />
             </nav>
             <div className={styles.dashboardContent}>
-                {selectDashboardChild(activeChild)}
+                {children}
             </div>
         </div>
 

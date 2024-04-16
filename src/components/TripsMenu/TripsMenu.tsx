@@ -1,5 +1,7 @@
 import styles from './TripsMenu.module.scss';
 import {useEffect, useState} from "react";
+import {useGetAllTripsQuery} from "../../services/apiSlice.ts";
+import {TripList} from "../TripList/TripList.tsx";
 
 export function TripsMenu() {
 
@@ -22,6 +24,9 @@ export function TripsMenu() {
         }
     }, [search]);
 
+    const {data} = useGetAllTripsQuery(debouncedSearch);
+
+
     const resetSearch = () => {
         setSearch('');
     };
@@ -30,7 +35,7 @@ export function TripsMenu() {
         <>
             <div className={styles.trips}>
                 <header className={styles.tripHeader}>
-                    <h2>Trip List</h2>
+                    <h2>Trips</h2>
                     <div className={styles.tripsHeaderSearch}>
                         <div className={styles.tripsHeaderSearch}>
                             <input className={styles.tripsHeaderSearchInput} type="text" placeholder="Search"
@@ -41,6 +46,7 @@ export function TripsMenu() {
                         </div>
                     </div>
                 </header>
+                <TripList trips={data || []}  />
             </div>
         </>
     );
