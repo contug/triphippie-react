@@ -4,6 +4,8 @@ import {TripsMenu} from "../../components/TripsMenu/TripsMenu.tsx";
 import styles from './TripsPage.module.scss';
 
 export function TripsPage() {
+
+
     return (
         <div className={styles.tripsPageContainer}>
             <Dashboard>

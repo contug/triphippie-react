@@ -5,12 +5,15 @@
   flex-direction: column;
   height: 100%;
   width: 100%;
-  padding: 1rem 2rem;
+  padding: 0 2rem 3rem 2rem;
+  position: relative;
+  max-height: 100%;
 
   &Header {
     display: flex;
     flex-direction: column;
     width: 100%;
+    margin-bottom: 4rem;
 
     &Search {
       width: 100%;

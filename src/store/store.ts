@@ -3,12 +3,14 @@ import {authSlice} from "./authSlice.ts";
 import {loadingSlice} from "./loadingSlice.ts";
 import {enableMapSet} from 'immer'
 import {apiSlice} from "../services/apiSlice.ts";
+import {tripSlice} from "./tripSlice.ts";
 
 enableMapSet();
 
 export const store = configureStore({
     reducer: {
         auth: authSlice.reducer,
+        trips: tripSlice.reducer,
         loading: loadingSlice.reducer,
         api: apiSlice.reducer
     },

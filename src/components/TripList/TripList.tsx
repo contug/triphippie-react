@@ -1,6 +1,7 @@
 import styles from './TripList.module.scss';
 import {Trip} from "../../model/Trip.ts";
 import {TripTagItem} from "../TripTag/TripTagItem.tsx";
+import {useNavigate, useParams} from "react-router-dom";
 
 interface TripListProps {
     trips: Trip[];
@@ -8,10 +9,18 @@ interface TripListProps {
 
 export function TripList({trips}: TripListProps) {
 
+    const navigate = useNavigate();
+
+    const {tripId} = useParams<{ tripId: string }>()
+    const handleTripSelection = (trip: Trip) => {
+        navigate(`/dashboard/trips/${trip.id}`);
+    }
+
 
     if (trips != null && trips.length > 0) {
         const tripElements = trips.map(trip =>
-            <div className={styles.tripElement}>
+            <div className={`${styles.tripElement} ${tripId == trip.id ? styles.tripElementSelected : ''}`} tabIndex={0}
+                 onClick={() => handleTripSelection(trip)}>
                 <header className={styles.tripElementHeader}>
                     <span className={styles.tripElementHeaderText}>{trip.name}</span>
                     <span
@@ -23,6 +32,7 @@ export function TripList({trips}: TripListProps) {
 
 
         return (
+
             <div className={styles.tripListContainer}>
                 {(trips && trips.length > 0) &&
                     tripElements
@@ -30,7 +40,7 @@ export function TripList({trips}: TripListProps) {
             </div>)
     } else {
         return (
-            <span>No trips available</span>
+            <div className={styles.noResults}>No trips available</div>
         );
     }
 

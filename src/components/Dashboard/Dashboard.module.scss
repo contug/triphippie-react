@@ -8,6 +8,8 @@
   min-width: 20%;
   flex-shrink: 2;
   background-color: #f5f5f5;
+  max-height: 100%;
+  overflow: hidden;
 
   &Header {
     display: flex;
@@ -16,8 +18,7 @@
     align-items: center;
     padding: 0 20px;
     height: 6rem;
-    background-color: #fff;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    background-color: #f5f5f5;
 
     &Icon {
 
@@ -37,5 +38,10 @@
       }
 
     }
+  }
+
+  &Content {
+    height: 100%;
+    width: 100%;
   }
 }

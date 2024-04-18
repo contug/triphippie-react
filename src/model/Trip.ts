@@ -8,4 +8,6 @@ export interface Trip {
     endDate: string;
     author: string;
     tags: TripTag[];
+    latitude: number;
+    longitude: number;
 }

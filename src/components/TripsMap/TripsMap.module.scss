@@ -1,0 +1,15 @@
+@import '../../index';
+
+.leafletContainer {
+    height: 100%;
+    width: 40%;
+    position: relative;
+    padding: 2rem;
+
+    &Inner {
+        height: 100%;
+        width: 100%;
+        border-radius: 2rem;
+        @include boxShadowBlack;
+    }
+}

@@ -20,10 +20,8 @@ export const apiSlice = createApi({
             query: (id: number) => ({
                 url: `/trip?id=${id}`,
                 method: 'GET'
-            })
+            }),
         }),
-
-
         addNewTrip: builder.mutation<Trip, Trip>({
             query: (trip: Trip) => ({
                 url: '/trip',

@@ -1,14 +1,12 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {Trip} from "../model/Trip.ts";
 import {TripTag} from "../model/TripTag.ts";
-import axios from "axios";
-import baseUrl from "../env.params.ts";
 
 
 export interface TripState {
     trips: Trip[],
     status: string,
-    error: any
+    error: Error | null
 }
 
 const initialState: TripState = {
@@ -21,17 +19,15 @@ const initialState: TripState = {
 export const tripSlice = createSlice({
     name: "trip",
     initialState,
-    reducers: {},
-    extraReducers(builder) {
-        builder
-            .addCase(searchTrips.fulfilled, (state, action) => {
-                state.trips = action.payload;
-            })
+    reducers: {
+        setTrips: (state, action: PayloadAction<Trip[]>) => {
+            state.trips = action.payload
+        },
     }
 })
 
 
-export const {} = tripSlice.actions;
+export const {setTrips} = tripSlice.actions;
 
 /**
  * Custom selector to filter trips by tags. If no tags are selected, all trips are returned.
@@ -41,14 +37,9 @@ export const {} = tripSlice.actions;
 export const selectTripsByTags = (state: TripState, tags: TripTag[]) =>
     state.trips.filter(trip => tags.every(tag => trip.tags.includes(tag)));
 
-
-export const searchTrips = createAsyncThunk('trip/searchTrips', async () => {
-    try {
-        const response = await axios.get<Trip[]>(baseUrl + "/trips");
-        return response.data;
-    } catch (error) {
-        console.error("Error fetching trips: ", error);
-        throw error;
-    }
-
-})
+/**
+ * Custom selector to find a trip by its id.
+ * @param state TripState - the current state
+ * @param tripId string - the id of the trip to find
+ */
+export const findTripById = (state: TripState, tripId: string) => state.trips.find(trip => trip.id == tripId);

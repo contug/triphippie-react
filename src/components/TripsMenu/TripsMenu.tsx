@@ -2,6 +2,9 @@ import styles from './TripsMenu.module.scss';
 import {useEffect, useState} from "react";
 import {useGetAllTripsQuery} from "../../services/apiSlice.ts";
 import {TripList} from "../TripList/TripList.tsx";
+import Loader from "../Loader/Loader.tsx";
+import {useAppDispatch} from "../../hooks/redux-hooks.ts";
+import {setTrips} from "../../store/tripSlice.ts";
 
 export function TripsMenu() {
 
@@ -24,8 +27,14 @@ export function TripsMenu() {
         }
     }, [search]);
 
-    const {data} = useGetAllTripsQuery(debouncedSearch);
+    const {data, isFetching, isSuccess} = useGetAllTripsQuery(debouncedSearch);
 
+    const dispatch = useAppDispatch();
+
+    // sets trips in the store if the search is empty --> fetching all trips
+    if (isSuccess && debouncedSearch === '') {
+        dispatch(setTrips(data || []))
+    }
 
     const resetSearch = () => {
         setSearch('');
@@ -42,11 +51,13 @@ export function TripsMenu() {
                                    value={search}
                                    onChange={e => setSearch(e.target.value)}/>
                             {search &&
-                                <button className={styles.tripsHeaderSearchReset} onClick={resetSearch}>X</button>}
+                                <button className={styles.tripsHeaderSearchReset} onClick={resetSearch}
+                                        tabIndex={0}>X</button>}
                         </div>
                     </div>
                 </header>
-                <TripList trips={data || []}  />
+                <Loader staticLoadingStatus={isFetching} isFullPage={false}/>
+                {!isFetching && <TripList trips={data || []}/>}
             </div>
         </>
     );

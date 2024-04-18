@@ -1,6 +1,6 @@
 import styles from './Login.module.scss';
 import {useNavigate} from "react-router-dom";
-import React from "react";
+import {useState} from "react";
 import {setLoadingStatus} from "../../store/loadingSlice.ts";
 import {useAppDispatch} from "../../hooks/redux-hooks.ts";
 
@@ -9,8 +9,8 @@ export default function Login() {
 
     const navigate = useNavigate();
 
-    const [email, setEmail] = React.useState('');
-    const [password, setPassword] = React.useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     const dispatch = useAppDispatch();
 
