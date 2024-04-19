@@ -33,14 +33,20 @@ function ChangeView({lat, lng, zoom}: ChangeViewProps) {
 
 export function TripsMap({trip}: TripsMapProps) {
 
+    const zoomLevel = 7;
 
     return (
         <div className={styles.leafletContainer}>
-            <MapContainer center={[trip.latitude, trip.longitude]} zoom={7} scrollWheelZoom={false} style={{
-                height: "100%",
-                borderRadius: "2rem"
-            }}>
-                <ChangeView lat={trip.latitude} lng={trip.longitude} zoom={7}/>
+            <MapContainer
+                center={[trip.latitude, trip.longitude]}
+                zoom={zoomLevel}
+                scrollWheelZoom={false}
+                attributionControl={false}
+                style={{
+                    height: "100%",
+                    borderRadius: "2rem"
+                }}>
+                <ChangeView lat={trip.latitude} lng={trip.longitude} zoom={zoomLevel}/>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

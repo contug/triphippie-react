@@ -1,7 +1,7 @@
 import Dashboard from "../../components/Dashboard/Dashboard.tsx";
-import {TripDetails} from "../../components/TripDetails/TripDetails.tsx";
 import {TripsMenu} from "../../components/TripsMenu/TripsMenu.tsx";
 import styles from './TripsPage.module.scss';
+import {Outlet} from "react-router-dom";
 
 export function TripsPage() {
 
@@ -11,7 +11,7 @@ export function TripsPage() {
             <Dashboard>
                 <TripsMenu/>
             </Dashboard>
-            <TripDetails/>
+            <Outlet/>
         </div>
     );
 }
